@@ -3,27 +3,50 @@
 import Card from "../../components/gameCard";
  
  function Home() {
-  /* codigo para pegar o accesss token
-  useEffect(() =>{
-    const fetchData = async () => {
-      await axios.post(`https://id.twitch.tv/oauth2/token?client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}&grant_type=client_credentials`)
-      .then(response => console.log(response.data));
-    }
-    fetchData();
-  })
-*/
 
   const [games, setGames] = useState([]);
+  const [userData, setUserData] = useState([]);
 
+  
+
+  // Get Top Games
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await api.get(`${api.defaults.baseURL}/games/top?first=50`);
-      console.log(response.data.data);
-      setGames(response.data.data);
+    const hash = new URLSearchParams(document.location.hash.slice(1));
+
+    const fetchGamesData = async () => {
+      const gamesResponse = await api.get(`${api.defaults.baseURL}/games/top?first=5`,{
+        'headers':{
+          'Authorization': `Bearer ${hash.get('access_token')}`
+        } 
+      });
+      console.log(gamesResponse.data.data);
+      setGames(gamesResponse.data.data);
     };
 
-    fetchData();
+    fetchGamesData();
   },[]);
+
+
+  // Get user data
+  useEffect(() => {
+    const hash = new URLSearchParams(document.location.hash.slice(1));
+
+    const fetchUserData = async() => {
+      
+    const userDataResponse = await api.get(`${api.defaults.baseURL}/users`,{
+      'headers':{
+        'Authorization': `Bearer ${hash.get('access_token')}`
+      } 
+    });
+    setUserData(userDataResponse.data.data);
+    
+    console.log(userDataResponse.data.data);
+
+    }
+
+    fetchUserData();
+  },[])
+
 
 
   return (
