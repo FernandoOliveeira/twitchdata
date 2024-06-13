@@ -4,12 +4,16 @@ import './global.css';
 
 import {BrowserRouter} from 'react-router-dom';
 import MainRoutes from './routes';
+import Navbar from './components/navbar';
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
+    <Navbar 
+      imgSrc = 'game_default.png'
+    />
     <MainRoutes/>
   </BrowserRouter>
 );
