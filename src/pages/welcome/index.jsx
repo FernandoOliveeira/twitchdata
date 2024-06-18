@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import getAccessToken from '../../functions/getAccessToken';
 import getUserData from '../../functions/getUserData';
+import getTopGames from '../../functions/getTopGames';
 import Loading from '../../components/loading';
 
 function Welcome() {
@@ -14,7 +15,7 @@ function Welcome() {
 
     try{
       if(localStorage.getItem('userData') === null){
-        
+
       setIsLoading(true);
       
       getAccessToken();
@@ -22,7 +23,7 @@ function Welcome() {
     
       setIsLoading(false);
       }
-
+            
     } catch(error){
       console.error('Error fetching data: ', error);
     }
