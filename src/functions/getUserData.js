@@ -1,33 +1,16 @@
 import api from "../api";
 
- const getUserData = () => {
-  try {
-    if(localStorage.getItem('userData') === null){
-      const fetchUserData = async() => {
-      const userDataResponse = await api.get(`${api.defaults.baseURL}/users`,{
-        'headers':{
-          'Authorization': `Bearer ${localStorage.accessToken}`
-        } 
-      });
-      
-      // Salva os dados do usuario no local storage
-      localStorage.userData = JSON.stringify(userDataResponse.data.data);
+async function getUserData() {
 
-      }
-      fetchUserData();
-
-      return true;
-    }
-    else{
-      return false;
-    }
-  }
+  const userDataResponse = await api.get(`${api.defaults.baseURL}/users`,{
+    'headers':{
+      'Authorization': `Bearer ${localStorage.accessToken}`
+    } 
+  });
   
-  catch (error) {
-    console.log('error: ' + error.response);
-  }
+  // Salva os dados do usuario no local storage
+  localStorage.userData = JSON.stringify(userDataResponse.data.data);
 
-    
   
 }
 
