@@ -2,22 +2,16 @@ import React, { useEffect, useState } from 'react'
 
 import getAccessToken from '../../functions/getAccessToken';
 import getUserData from '../../functions/getUserData';
-import getTopGames from '../../functions/getTopGames';
 import Loading from '../../components/loading';
 
 function Welcome() {
 
-  const [isLoading, setIsLoading] = useState(false);
-  
-
+  const [isLoading, setIsLoading] = useState(true);
   
   const getInfo = async () => {
-
     try{
-      if(localStorage.getItem('userData') === null){
+      if(localStorage.getItem('userData') === null || localStorage.getItem('access_token') === null){
 
-      setIsLoading(true);
-      
       getAccessToken();
       await getUserData();
     
@@ -29,16 +23,16 @@ function Welcome() {
     }
 
   }
-
+  
   useEffect(() => {
     
     getInfo();
-    
-    
+    if(localStorage.getItem('userData') !== null){
+      setIsLoading(false);
+    }
     
   }, [])
 
-  console.log(JSON.parse(localStorage.userData));
   return (
     <div className='container center'>
       
