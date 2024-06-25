@@ -5,7 +5,7 @@ import './global.css';
 import {BrowserRouter} from 'react-router-dom';
 import MainRoutes from './routes';
 import Navbar from './components/navbar';
-import { NAV_LINKS } from './contants';
+import { NAV_LINKS } from './constants';
 
 
 
@@ -14,8 +14,26 @@ root.render(
   <BrowserRouter>
     <Navbar 
       
-      imgSrc = {JSON.parse(localStorage.userData).map((data) => data.profile_image_url)}
-      imgAlt = {JSON.parse(localStorage.userData).map((data) => data.login)}
+      imgSrc = {
+        localStorage.getItem('userData')?
+
+          JSON.parse(localStorage.userData).map((data) => data.profile_image_url)
+        
+        : '/game_default.png'
+      }
+      imgAlt = {
+        localStorage.getItem('userData')?
+
+          JSON.parse(localStorage.userData).map((data) => data.login)
+        : 'Alt Image'
+      }
+
+      hide = {
+        localStorage.getItem('userData')?
+          ''
+        : 'hide'
+      }
+      
       navLinks = {NAV_LINKS}
       
     />

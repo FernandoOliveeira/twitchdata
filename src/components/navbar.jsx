@@ -4,7 +4,7 @@ const navbar = (props) => {
   return (
   <nav>
     <div className="nav-wrapper valign-wrapper">
-      <img src={props.imgSrc} className="brand-logo right nav-img circle" alt={props.imgAlt}/>
+      <img src={props.imgSrc} className={`brand-logo right nav-img circle ${props.hide}`} alt={props.imgAlt}/>
       <ul id="nav-mobile" className="left hide-on-med-and-down">
         {
           props.navLinks.map((link) => (
