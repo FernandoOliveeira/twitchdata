@@ -1,24 +1,39 @@
- import React from "react";
+ import React, { useEffect, useState } from "react";
+
 import GameCard from "../../components/gameCard";
-import getAccessToken from "../../functions/getAccessToken";
- 
+import getTopGames from '../../functions/getTopGames';
+import Loading from '../../components/loading';
+
+
  function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(async () => {
+
+    await getTopGames();
+    setIsLoading(false);
+  
+  }, [])
+  
   
   return (
     <div className="container">
       <h1 className="center">Top Games</h1>
       <div className="row">
         {
-          getAccessToken() ? (JSON.parse(localStorage.topGames).map((game) => (
-          <GameCard 
-            key = {game.id}
-            title = {game.name}
-            imgSrc = {game.box_art_url}
-            alt = {game.name}
-            
-          />
+          isLoading ? (<Loading/>)
           
-          )) ): (console.log('testing'))
+          :((JSON.parse(localStorage.topGames).map(
+            (game) => (
+            <GameCard 
+              key = {game.id}
+              title = {game.name}
+              imgSrc = {game.box_art_url}
+              alt = {game.name}
+
+            />
+              
+          ))))
         }
       </div>
     </div>
