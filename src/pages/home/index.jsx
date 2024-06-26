@@ -8,11 +8,13 @@ import Loading from '../../components/loading';
  function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(async () => {
-
-    await getTopGames();
-    setIsLoading(false);
-  
+  useEffect(() => {
+    
+    const getGames = async () => {
+      await getTopGames();
+      setIsLoading(false);
+    }
+    getGames();
   }, [])
   
   
