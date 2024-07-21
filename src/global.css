@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: black;
+  background-color: rgb(42, 42, 42);
   color: white;
 }
 
@@ -29,3 +29,12 @@ code {
   width: 60px;
 }
 
+.zoom{
+  transition: transform .2s; /* Animation */
+  margin: 0 auto;
+  transform: scale(.9)
+}
+
+.zoom:hover{
+  transform: scale(1);
+}
