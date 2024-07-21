@@ -42,3 +42,4 @@ export const RESPONSIVE = {
       slidesToSlide: 3
     }
   };
+  
